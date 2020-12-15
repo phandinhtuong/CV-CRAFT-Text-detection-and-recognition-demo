@@ -9,7 +9,7 @@ import numpy as np
 #print(arr1)
 array = np.array([[1,2,"initial"]], dtype=object) #create an array with initial value
 #open file, get x,y coordinate of the top left corner of the word box and the word from result file
-with open('speUC.pn_log_demo_result_vgg.txt') as file: # open file
+with open('te.pn_log_demo_result_vgg.txt') as file: # open file
     for line in file: # read line by line
         #print("new line  ")
         #print(line)
@@ -34,7 +34,8 @@ with open('speUC.pn_log_demo_result_vgg.txt') as file: # open file
         #print(f)
         #print(word)
 array = np.delete(array,0,0) #delete the initial value
-array = array[array[:,1].argsort()] #sort by second column (y)
+#array = array[array[:,0].argsort()] #sort by second column (y)
+#array = array[array[:,1].argsort(kind='mergesort')] #sort by second column (y)
 #array = np.sort(array)
 print(array)
 
@@ -43,16 +44,17 @@ print("\narray after normalization:\n")
 # normalize the x and y
 for arrayElement in array:
     #print(arrayElement[1])
-    normYValue = arrayElement[1]/10 #divide by 10
+    normYValue = arrayElement[1]/15 #divide by 10
     normYValue = round(normYValue)    #round to int
     #print(normValue)
     arrayElement[1] = normYValue
     
-    normXValue = arrayElement[0]/10 #divide by 10
+    normXValue = arrayElement[0]/15 #divide by 10
     normXValue = round(normXValue)    #round to int
     #print(normValue)
     arrayElement[0] = normXValue
-    
+array = array[array[:,0].argsort()] #sort by second column (x)
+array = array[array[:,1].argsort(kind='mergesort')] #sort by second column (y)
 print(array)
 print("\nFull text:\n")
 
@@ -62,14 +64,14 @@ index = 0
 for arrayElement in array:
     if index == 0:
         print('\n' * arrayElement[1], end = '')
-        print(' '*2 * arrayElement[0],arrayElement[2], end = '')
+        print(' ' * arrayElement[0],arrayElement[2], end = '')
         
     else:
         if arrayElement[1] == array[index-1,1]:
-            print(' '*2 * (arrayElement[0]-array[index-1,0]),arrayElement[2], end = '')
+           print(' ' * (arrayElement[0]-array[index-1,0]),arrayElement[2], end = '')
         else:
            print('\n' * (arrayElement[1] - array[index-1,1]), end = '')
-           print(' '*2 * arrayElement[0],arrayElement[2], end = '')
+           print(' ' * arrayElement[0],arrayElement[2], end = '')
    #print(arrayElement[2])
     index+=1
     
