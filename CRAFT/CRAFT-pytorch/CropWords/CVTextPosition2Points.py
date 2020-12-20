@@ -1,5 +1,15 @@
 import numpy as np
 
+def printAndSave(*string):
+    print(*string, end = '') #print to terminal
+    resultFile = open('ResultFile.txt','a+') #open to append file
+    print(*string, end = '',file=resultFile) #print to file 
+    resultFile.close()                       #close file 
+    
+#def printAndSave(string1,string2):
+#    print(string1,string2)
+#def printAndSave(string1,string2,string3):
+#    print(string1,string2,string3)    
 array = np.array([[1,2,3,4,"initial",5]], dtype=object) #create an array with initial value
 #open file, get x,y coordinate of the top left corner of the word box and the word from result file
 with open('te.pn_log_demo_result_vgg.txt') as file: # open file
@@ -39,14 +49,14 @@ array = np.delete(array,0,0) #delete the initial value
 #array = array[array[:,0].argsort()] #sort by second column (y)
 #array = array[array[:,1].argsort(kind='mergesort')] #sort by second column (y)
 #array = np.sort(array)
-print(array)
+printAndSave(array)
 
-print("\narray after normalization:\n")
+printAndSave("\narray after normalization:\n")
 
 # normalize the x and y
 #(a ratio of width,height of image over those of word box??)
-yRatio = 50
-xRatio = 50
+yRatio = 15
+xRatio = 15
 for arrayElement in array:
     #print(arrayElement[1])
     normYValue = arrayElement[1]/yRatio #divide by ratio
@@ -75,26 +85,30 @@ for arrayElement in array:
     arrayElement[5] = normMiddleYValue
 array = array[array[:,0].argsort()] #sort by second column (x)
 array = array[array[:,5].argsort(kind='mergesort')] #sort by second column (y) #update: middle y
-print(array)
-print("\nFull text:\n")
+printAndSave(array)
+printAndSave("\nFull text:\n")
 
 
 #problem: not correct in the same line,
 index = 0
 #coeffectient of x and y to print (because space != newline (' ' != '\n'))
-xCoefficient = 4
+xCoefficient = 2
 yCoefficient = 1
 for arrayElement in array:
     if index == 0:
-        print('\n'* arrayElement[1]*yCoefficient, end = '')
-        print(' ' * arrayElement[0]*xCoefficient,arrayElement[4], end = '')
-        
+        #printAndSave('\n'* arrayElement[1]*yCoefficient, end = '')
+        #printAndSave(' ' * arrayElement[0]*xCoefficient,arrayElement[4], end = '')
+        printAndSave('\n'* arrayElement[1]*yCoefficient)
+        printAndSave(' ' * arrayElement[0]*xCoefficient,arrayElement[4])
     else:
         if arrayElement[5] == array[index-1,5]: #update: check middle y
-           print(' ' * (arrayElement[0]-array[index-1,2])*xCoefficient,arrayElement[4], end = '')
+           #printAndSave(' ' * (arrayElement[0]-array[index-1,2])*xCoefficient,arrayElement[4], end = '')
+           printAndSave(' ' * (arrayElement[0]-array[index-1,2])*xCoefficient,arrayElement[4])
         else:
-           print('\n' * (arrayElement[5] - array[index-1,5])*yCoefficient, end = '') #update: print by middle y
-           print(' ' * arrayElement[0]*xCoefficient,arrayElement[4], end = '')
+           #printAndSave('\n' * (arrayElement[5] - array[index-1,5])*yCoefficient, end = '') #update: print by middle y
+           #printAndSave(' ' * arrayElement[0]*xCoefficient,arrayElement[4], end = '')
+           printAndSave('\n' * (arrayElement[5] - array[index-1,5])*yCoefficient) #update: print by middle y
+           printAndSave(' ' * arrayElement[0]*xCoefficient,arrayElement[4])
    #print(arrayElement[2])
     index+=1
     

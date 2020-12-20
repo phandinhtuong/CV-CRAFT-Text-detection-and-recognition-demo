@@ -44,7 +44,7 @@ print("\narray after normalization:\n")
 # normalize the x and y
 for arrayElement in array:
     #print(arrayElement[1])
-    normYValue = arrayElement[1]/15 #divide by 10
+    normYValue = arrayElement[1]/20 #divide by 10
     normYValue = round(normYValue)    #round to int
     #print(normValue)
     arrayElement[1] = normYValue
