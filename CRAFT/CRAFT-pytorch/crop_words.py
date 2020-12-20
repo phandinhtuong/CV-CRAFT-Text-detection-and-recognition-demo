@@ -47,7 +47,7 @@ def generate_words(image_name, score_bbox, image):
         folder = '/'.join( image_name.split('/')[:-1])
 
         #result dir / CHANGE DIR
-        dir = 'E:\CVProject\CRAFT\CRAFT-pytorch\CropWords\\'
+        dir = '.\\CropWords\\'
 
         if os.path.isdir(os.path.join(dir + folder)) == False :
           os.makedirs(os.path.join(dir + folder))

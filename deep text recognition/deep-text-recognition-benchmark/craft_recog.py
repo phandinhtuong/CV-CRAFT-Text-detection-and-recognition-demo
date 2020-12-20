@@ -18,7 +18,7 @@ def demo(opt):
 
 
     """Open csv file wherein you are going to write the Predicted Words"""
-    data = pd.read_csv('E:\CVProject\CRAFT\CRAFT-pytorch\Results\data.csv')
+    data = pd.read_csv('..\\..\\CRAFT\\CRAFT-pytorch\\Results\\data.csv')
 
     """ model configuration """
     if 'CTC' in opt.Prediction:
@@ -85,7 +85,7 @@ def demo(opt):
             for img_name, pred, pred_max_prob in zip(image_path_list, preds_str, preds_max_prob):
                 
                 
-                start = 'E:\CVProject\CRAFT\CRAFT-pytorch\CropWords\\'
+                start = '..\\..\\CRAFT\\CRAFT-pytorch\\CropWords\\'
                 path = os.path.relpath(img_name, start)
 
                 folder = os.path.dirname(path)
@@ -112,10 +112,10 @@ def demo(opt):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image_folder',default = 'E:\\CVProject\\CRAFT\\CRAFT-pytorch\\CropWords\\', help='path to image_folder which contains text images')
+    parser.add_argument('--image_folder',default = '..\\..\\CRAFT\\CRAFT-pytorch\\CropWords\\', help='path to image_folder which contains text images')
     parser.add_argument('--workers', type=int, help='number of data loading workers', default=4)
     parser.add_argument('--batch_size', type=int, default=192, help='input batch size')
-    parser.add_argument('--saved_model', default = 'E:\\CVProject\\CRAFT\\CRAFT-pytorch\\weights\\None-VGG-BiLSTM-CTC.pth', help="path to saved_model to evaluation")
+    parser.add_argument('--saved_model', default = '..\\..\\CRAFT\\CRAFT-pytorch\\weights\\None-VGG-BiLSTM-CTC.pth', help="path to saved_model to evaluation")
     """ Data processing """
     parser.add_argument('--batch_max_length', type=int, default=25, help='maximum-label-length')
     parser.add_argument('--imgH', type=int, default=32, help='the height of the input image')
